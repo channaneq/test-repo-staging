@@ -32,8 +32,10 @@ jobs:
     - id: set-matrix
       run: |
         test=(app,orange)
-        echo "::set-output name=matrix::name,test,test2"
-  job2:
+        IFS=','
+        test2=${{test[@]}}
+        echo "::set-output name=matrix::$(echo test2 | jq -R -s -c 'split("\n")[:-1]')"
+  job2:  job2:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
