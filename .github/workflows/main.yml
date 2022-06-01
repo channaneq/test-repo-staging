@@ -22,7 +22,7 @@ jobs:
       value: [test,test3]
     steps:
       - run: |
-         echo "${{matrix.value[@]}}" 
+         echo "${{ matrix.value }}" 
   #build:
    # needs: [ setup ]
     #runs-on: ubuntu-latest
