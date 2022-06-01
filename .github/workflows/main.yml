@@ -30,7 +30,9 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
     - id: set-matrix
-      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\"},{\"project\":\"bar\"}]}"
+      run: |
+        test=(app,orange)
+        echo "::set-output name=matrix::echo ${test[@]}"
   job2:
     needs: job1
     runs-on: ubuntu-latest
@@ -38,7 +40,6 @@ jobs:
       matrix: ${{fromJson(needs.job1.outputs.matrix)}}
     steps:
     - run: echo ${{ matrix.project }}
-    - run: echo ${{ matrix.config }}       
   #build:
    # needs: [ setup ]
     #runs-on: ubuntu-latest
