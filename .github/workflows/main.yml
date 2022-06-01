@@ -33,7 +33,7 @@ jobs:
       run: |
         test=(app,orange)
         IFS=','
-        test2=${{test[@]}}
+        test2=${test[@]}
         echo "::set-output name=matrix::$(echo $test2 | jq -R -s -c 'split("\n")[:-1]')"
   job2: 
     needs: job1
